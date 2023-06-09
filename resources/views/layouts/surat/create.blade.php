@@ -51,6 +51,7 @@
                         </div>
                         @enderror
                       </div>
+                      <label style="font-weight:600; color: #34395e; font-size: 12px; ">Kirim ke :</label>
                       <div class="form-check form-group">
                         @foreach ($users as $user)
                         @if ($user->name != auth()->user()->name && ($user->name != 'admin' || auth()->user()->name == 'admin') && ($user->prodi_id == auth()->user()->prodi_id))
