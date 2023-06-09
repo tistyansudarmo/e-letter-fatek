@@ -100,7 +100,6 @@ class SuratController extends Controller
             'content_surat' => 'required',
             'logo_surat' => ['mimes:jpeg,jpg,png'],
             'ttd_surat' => ['mimes:jpeg,jpg,png'],
-            'penerima' => 'required|array',
             'penerima' => ['required', 'array', 'exists:users,id']
         ]);
 
