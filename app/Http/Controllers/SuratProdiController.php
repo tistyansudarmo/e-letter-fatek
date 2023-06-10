@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Surat;
+use App\Models\User;
 
 class SuratProdiController extends Controller
 {
@@ -15,4 +16,8 @@ class SuratProdiController extends Controller
         ->select('surats.*', 'sender.name as sender_name', 'recipient.name as recipient_name')
         ->get()], ['title' => 'Surat Prodi TI']);
     }
+
+    
+
+   
 }

@@ -20,4 +20,10 @@ class UsersProdiTiController extends Controller
         return view('layouts.users-prodi.prodi-ti', ['users' => $users], ['title' => 'Prodi Teknik Informatika']);
     }
 
+    public function destroy(User $user) {
+        
+        User::where('name', $user->name)->delete();
+        return redirect('/users-prodi-ti');
+    }
+
 }
