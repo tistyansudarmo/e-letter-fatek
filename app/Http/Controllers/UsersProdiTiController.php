@@ -14,16 +14,24 @@ class UsersProdiTiController extends Controller
     {
         $users = DB::table('users')
                     ->join('levels', 'users.level_id', '=', 'levels.id')
+                    ->join('prodis', 'prodis.id', '=', 'users.prodi_id')
                     ->select('users.*', 'levels.jabatan')
                     ->where('prodi_id', '=', 1)
                     ->get();
-        return view('layouts.users-prodi.prodi-ti', ['users' => $users], ['title' => 'Prodi Teknik Informatika']);
+
+        $prodi = Prodi::all();
+        
+        $level = Level::all();
+        return view('layouts.users-prodi.prodi-ti', ['users' => $users, 'prodi' => $prodi, 'level' => $level], ['title' => 'Prodi Teknik Informatika']);
     }
+
 
     public function destroy($id) {
         
         User::where('id', $id)->delete();
         return redirect('/users-prodi-ti');
     }
+
+    
 
 }
