@@ -57,7 +57,7 @@ Route::get('/surat/{surat:no_surat}', [SuratController::class, 'show'])->middlew
 
 Route::delete('/surat/{userId}/{suratId}', [SuratController::class, 'destroy'])->middleware('auth');
 
-Route::delete('/users-delete/{user:name}', [UsersProdiTiController::class, 'destroy'])->middleware('auth');
+Route::delete('/users-delete/{id}', [UsersProdiTiController::class, 'destroy'])->middleware('auth');
 
 Route::get('/surat-prodi-ti', [SuratProdiController::class, 'prodi_ti'])->middleware('auth');
 

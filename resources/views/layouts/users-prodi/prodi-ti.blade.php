@@ -32,23 +32,23 @@
 
         <div class="d-flex justify-content-between">
           <a href="" class="badge badge-primary mr-2">Edit</a>
-        <form action="/users-delete/{{ $user->name }}" method="post"> 
+        <form action="/users-delete/{{ $user->id }}" method="post"> 
           @csrf
           @method('delete')
-        <a href="/users-delete/{{ $user->name }}" class="badge badge-danger border-0" data-toggle="modal" data-target="#exampleModal">Hapus</a>
+        <a href="/users-delete/{{ $user->id }}" class="badge badge-danger border-0" data-toggle="modal" data-target="#exampleModal{{ $user->id }}">Hapus</a>
         {{-- <button type="button" class="badge badge-danger border-0" data-toggle="modal" data-target="#exampleModal" >Hapus</button> --}}
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal{{ $user->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Hapus Surat</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Hapus user {{ $user->name }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
-                Apakah anda yakin menghapus surat?
+                Apakah anda yakin menghapus user?
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
