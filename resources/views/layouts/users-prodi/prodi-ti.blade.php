@@ -13,7 +13,9 @@
       <th scope="col">T/T/B Lahir</th>
       <th scope="col">Nomor Handphone</th>
       <th scope="col">Jabatan</th>
+      @can('register')
       <th scope="col">Aksi</th>
+      @endcan
     </tr>
   </thead>
   <tbody>
@@ -31,7 +33,7 @@
         <td>
 
         <div class="d-flex justify-content-between">
-
+          @can('register')
           <form action="/users-update/{{ $user->id }}" method="post">
             @csrf
             @method('put')
@@ -192,6 +194,7 @@
         </td>
 
   </tr>
+    @endcan
     @endforeach
   </tbody>
 </table>

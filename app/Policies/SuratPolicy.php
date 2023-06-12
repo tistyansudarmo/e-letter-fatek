@@ -56,7 +56,7 @@ class SuratPolicy
      */
     public function update(User $user, Surat $surat)
     {
-        //
+        return $surat->sender_id == auth()->user()->id;
     }
 
     /**
@@ -68,7 +68,7 @@ class SuratPolicy
      */
     public function delete(User $user, Surat $surat)
     {
-        //
+        
     }
 
     /**
