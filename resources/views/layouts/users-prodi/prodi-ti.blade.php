@@ -17,9 +17,9 @@
     </tr>
   </thead>
   <tbody>
-      @foreach ($users->skip(1) as $user)
-    <tr>
-            
+
+    @foreach ($users as $user)
+    <tr>  
         <th scope="row">{{ $loop->iteration }}</th>
         <td>{{ $user->name}}</td>
         <td>{{ $user->email }}</td>
@@ -31,13 +31,17 @@
         <td>
 
         <div class="d-flex justify-content-between">
-          <a href="" class="badge badge-primary mr-2" data-toggle="modal" data-target="#exampleModal">Edit</a>
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+          <form action="/users-update/{{ $user->id }}" method="post">
+            @csrf
+            @method('put')
+          <a href="/users-update/{{ $user->id }}" class="badge badge-primary mr-2" data-toggle="modal" data-target="#exampleModal{{ $user->id }}">Edit</a>
+            <div class="modal fade" id="exampleModal{{ $user->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Data User</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -72,7 +76,7 @@
                   </div>
 
                   <div class="col-md-6">
-                     <label for="password" class="d-block mt-4">Password</label>
+                     <label for="password" class="d-block mt-4">Ubah Password</label>
                       <input id="password" type="password" class="form-control pwstrength @error('password') is-invalid @enderror" data-indicator="pwindicator" name="password">
                       @error('password')
                       <div class="invalid-feedback">
@@ -137,7 +141,7 @@
                   </div>
 
                   <div class="col-md-6">
-                    <select class="form-control mt-4" aria-label="Default select example" name="prodi_id">
+                    <select class="form-control mt-4" aria-label="Default select example" name="level_id">
                         <option value="">--Pilih Level--</option>
                         @foreach ($level as $levels)
                         <option {{ $user->level_id == $levels->id ? 'selected' : '' }} value="{{ $levels->id}}">{{ $levels->jabatan }}</option>
@@ -146,9 +150,6 @@
                   </div>
                 </div>
               </div>
-
-              
-
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
                 <button type="submit" class="btn btn-danger">Simpan</button>
@@ -156,15 +157,15 @@
             </div>
           </div>
         </div>
-     
+          </form>
 
         <form action="/users-delete/{{ $user->id }}" method="post"> 
           @csrf
           @method('delete')
-        <a href="/users-delete/{{ $user->id }}" class="badge badge-danger border-0" data-toggle="modal" data-target="#exampleModal{{ $user->id }}">Hapus</a>
+        <a href="/users-delete/{{ $user->id }}" class="badge badge-danger border-0" data-toggle="modal" data-target="#exampleModal2{{ $user->id }}">Hapus</a>
         {{-- <button type="button" class="badge badge-danger border-0" data-toggle="modal" data-target="#exampleModal" >Hapus</button> --}}
 
-        <div class="modal fade" id="exampleModal{{ $user->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal2{{ $user->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
@@ -190,7 +191,7 @@
       </form>
         </td>
 
-    </tr>
+  </tr>
     @endforeach
   </tbody>
 </table>

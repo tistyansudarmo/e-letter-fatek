@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Prodi;
 use App\Models\User;
 use App\Models\Level;
+use Illuminate\Validation\Rule;
 
 class UsersProdiTiController extends Controller
 {
@@ -32,6 +33,26 @@ class UsersProdiTiController extends Controller
         return redirect('/users-prodi-ti');
     }
 
-    
+     public function update(Request $request, User $user) {
+        $validate = $request->validate([
+            'name' => ['required'],
+            'username' => ['required',  Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', Rule::unique('users')->ignore($user->id)],
+            'nip' => ['required', Rule::unique('users')->ignore($user->id)],
+            'no_hp' => 'required',
+            'alamat' => 'required',
+            'ttl' => 'required',
+            'password' => '',
+            'prodi_id' => 'required',
+            'level_id' => 'required'
+        ]);
+        
+        $validate['password'] = bcrypt($validate['password']);
+        
+        $user->update($validate);
+
+        return redirect('/users-prodi-ti');
+
+    }
 
 }

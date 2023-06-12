@@ -12,14 +12,16 @@
                 <a href="/"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
               </li>
               <li class="menu-header">Letter</li>
+              @if (auth()->user()->level->jabatan != 'Admin')
               <li class="dropdown {{ Request::is('surat-masuk', 'surat-keluar') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Inbox</span></a>
-                @if (auth()->user()->level->jabatan != 'Admin')
                   <ul class="dropdown-menu">
                     <li><a class="nav-link" href="/surat-masuk">Surat Masuk</a></li>
                     <li><a class="nav-link" href="/surat-keluar">Surat Keluar</a></li>
                   </ul>
                 @else
+                <li class="dropdown {{ Request::is('surat-prodi-ti', 'surat-prodi-ptik', 'surat-prodi-sipil') ? 'active' : '' }}">
+                <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Inbox</span></a>
                   <ul class="dropdown-menu">
                     <li><a class="nav-link" href="/surat-prodi-ti">Surat Prodi TI</a></li>
                     <li><a class="nav-link" href="">Surat Prodi PTIK</a></li>

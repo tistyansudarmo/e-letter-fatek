@@ -59,10 +59,13 @@ Route::delete('/surat/{userId}/{suratId}', [SuratController::class, 'destroy'])-
 
 Route::delete('/users-delete/{id}', [UsersProdiTiController::class, 'destroy'])->middleware('auth');
 
+Route::put('/users-update/{user:id}', [UsersProdiTiController::class, 'update']);
+
 Route::get('/surat-prodi-ti', [SuratProdiController::class, 'prodi_ti'])->middleware('auth');
 
 Route::get('/edit-surat/{surat:no_surat}/edit', [SuratController::class, 'edit'])->name('surat.edit');
 
 Route::put('/surat/{surat}', [SuratController::class, 'update'])->name('surat.update');
+
 
 
