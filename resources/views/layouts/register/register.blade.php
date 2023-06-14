@@ -41,14 +41,14 @@
                   <div class="row">
                     <div class="form-group col-6">
                       <label for="name">Nama Lengkap</label>
-                      <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" autofocus>
+                      <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autofocus>
                       @error('name')
                       <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
                     </div>
                     <div class="form-group col-6">
                       <label for="username">Username Login</label>
-                      <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username">
+                      <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}">
                       @error('username')
                       <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
@@ -58,7 +58,7 @@
                   <div class="row">
                     <div class="form-group col-6">
                       <label for="email">Email</label>
-                      <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email">
+                      <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
                       @error('email')
                       <div class="invalid-feedback">
                         {{ $message }}
@@ -82,7 +82,7 @@
                     <div class="row">
                       <div class="form-group col-6">
                       <label for="tempat">Tempat Lahir</label>
-                      <input id="tempat" type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat">
+                      <input id="tempat" type="text" class="form-control @error('alamat') is-invalid @enderror" name="alamat" value="{{ old('alamat') }}">
                       @error('alamat')
                           <div class="invalid-feedback">
                             {{ $message }}
@@ -92,7 +92,7 @@
 
                      <div class="form-group col-6">
                       <label for="date">Tanggal/Bulan/Tahun</label>
-                      <input id="date" type="date" class="form-control @error('ttl') is-invalid @enderror" name="ttl">
+                      <input id="date" type="date" class="form-control @error('ttl') is-invalid @enderror" name="ttl" value="{{ old('ttl') }}">
                       @error('ttl')
                           <div class="invalid-feedback">
                             {{ $message }}
@@ -103,7 +103,7 @@
                     <div class="row">
                       <div class="form-group col-6">
                       <label for="nip">Nomor Induk Pegawai</label>
-                      <input id="nip" type="text" class="form-control @error('nip') is-invalid @enderror" name="nip">
+                      <input id="nip" type="text" class="form-control @error('nip') is-invalid @enderror" name="nip" value="{{ old('nip') }}">
                       @error('nip')
                           <div class="invalid-feedback">
                             {{ $message }}
@@ -112,7 +112,7 @@
                     </div>
                      <div class="form-group col-6">
                       <label for="no_hp">No Hp</label>
-                      <input id="no_hp" type="text" class="form-control @error('no_hp') is-invalid @enderror" name="no_hp">
+                      <input id="no_hp" type="text" class="form-control @error('no_hp') is-invalid @enderror" name="no_hp" value="{{ old('no_hp') }}">
                       @error('no_hp')
                           <div class="invalid-feedback">
                             {{ $message }}
@@ -122,7 +122,7 @@
                   </div>
                    <div class="row">
                       <div class="form-group col-6">
-                      <select class="form-control" aria-label="Default select example" name="prodi_id">
+                      <select class="form-control" aria-label="Default select example" name="prodi_id" value="{{ old('prodi_id') }}">
                         <option value="">--Pilih Prodi--</option>
                         @foreach ($prodi as $prodis)
                         <option value="{{ $prodis->id }}">{{ $prodis->prodi }}</option>
@@ -130,7 +130,7 @@
                       </select>
                     </div>
                        <div class="form-group col-6">
-                        <select class="form-control" aria-label="Default select example" name="level_id">
+                        <select class="form-control" aria-label="Default select example" name="level_id" value="{{ old('level') }}">
                         <option value="">--Pilih Jabatan--</option>
                         @foreach ($level as $levels)
                         <option value="{{ $levels->id }}">{{ $levels->jabatan }}</option>

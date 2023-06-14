@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         
         User::create([
-            'name' => 'admin',
+            'name' => ucwords('admin'),
             'username' => 'admin',
             'email' => 'sudarmoian@gmail.com',
             'password' => bcrypt(12345678),
@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'medi tinambunan',
+            'name' => ucwords('medi tinambunan'),
             'username' => 'meditinambunan',
             'email' => 'meditinambunan@gmail.com',
             'password' => bcrypt(12345678),
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'tistyan sudarmo',
+            'name' => ucwords('tistyan sudarmo'),
             'username' => 'tistyans',
             'email' => 'tistyansudarmo@gmail.com',
             'password' => bcrypt(12345678),
@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'ferrent tacoh',
+            'name' => ucwords('ferrent tacoh'),
             'username' => 'ferrenttacoh',
             'email' => 'ferrenttacoh@gmail.com',
             'password' => bcrypt(12345678),

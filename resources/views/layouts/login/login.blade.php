@@ -41,7 +41,7 @@
                   @csrf
                   <div class="form-group">
                     <label for="username">Username</label>
-                    <input id="username" type="text" class="form-control" name="username" tabindex="1" required autofocus autocomplete="off">
+                    <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" tabindex="1" required autofocus autocomplete="off">
                   </div>
 
                   <div class="form-group">

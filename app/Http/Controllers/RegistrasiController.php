@@ -28,6 +28,8 @@ class RegistrasiController extends Controller
             'prodi_id' => 'required',
             'level_id' => 'required'
         ]);
+
+        $validate['name'] = ucwords($validate['name']);
         
         $validate['password'] = bcrypt($validate['password']);
 
