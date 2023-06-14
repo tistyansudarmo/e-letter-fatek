@@ -2,7 +2,7 @@
 
 @section('container')
 
-  <table class="table table-hover table-responsive-md">
+  <table class="table table-hover table-responsive">
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -30,10 +30,10 @@
         <td>{{ $user->ttl }}</td>
         <td>{{ $user->no_hp }}</td>
         <td>{{ $user->jabatan }}</td>
+        @can('register')
         <td>
 
         <div class="d-flex justify-content-between">
-          @can('register')
           <form action="/users-update/{{ $user->id }}" method="post">
             @csrf
             @method('put')

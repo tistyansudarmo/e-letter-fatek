@@ -12,6 +12,7 @@ class LoginController extends Controller
         return view('layouts.login.login');
     }
 
+
     public function authenticate(Request $request) {
         $credentials = $request->validate([
             'username' => ['required'],
@@ -25,6 +26,7 @@ class LoginController extends Controller
             return redirect('/login')->with('failed', 'Username / Password anda salah!');
         }
     }
+
 
     public function logout(Request $request) {
         Auth::logout();
