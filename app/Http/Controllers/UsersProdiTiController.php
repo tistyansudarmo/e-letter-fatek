@@ -13,10 +13,10 @@ class UsersProdiTiController extends Controller
 {
     public function view()
     {
-        if(auth()->user()->prodi_id != 1) {
+        if(auth()->user()->prodi_id != 1 && auth()->user()->level->jabatan != 'Admin') {
             abort(403);
         }
-        
+
         $users = DB::table('users')
                     ->join('levels', 'users.level_id', '=', 'levels.id')
                     ->join('prodis', 'prodis.id', '=', 'users.prodi_id')

@@ -29,20 +29,5 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('register', function(User $user){
-            return $user->level->jabatan == 'Admin';
-        });
-
-        Gate::define('prodi_ti', function(User $user){
-            return $user->prodi_id == 1 || $user->level->jabatan == 'Admin';
-        });
-
-        Gate::define('prodi_ptik', function(User $user){
-            return $user->prodi_id == 2 || $user->level->jabatan == 'Admin';
-        });
-
-        Gate::define('prodi_sipil', function(User $user){
-            return $user->prodi_id == 3 || $user->level->jabatan == 'Admin';
-        });
     }
 }

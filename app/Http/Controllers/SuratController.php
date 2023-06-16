@@ -22,7 +22,7 @@ class SuratController extends Controller
         ->where('surats.sender_id', '=', auth()->user()->id)
         ->orderByDesc('surats.id')
         ->get()]);
-   
+    
     }
 
 

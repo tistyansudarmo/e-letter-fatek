@@ -9,7 +9,7 @@ class UsersProdiPtikController extends Controller
 {
     public function view() {
 
-        if(auth()->user()->prodi_id != 2) {
+        if(auth()->user()->prodi_id != 2 && auth()->user()->level->jabatan != 'Admin') {
             abort(403);
         }
 

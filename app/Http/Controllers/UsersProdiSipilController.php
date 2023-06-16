@@ -9,7 +9,7 @@ class UsersProdiSipilController extends Controller
 {
     public function view() {
 
-        if(auth()->user()->prodi_id != 3) {
+        if(auth()->user()->prodi_id != 3 && auth()->user()->level->jabatan != 'Admin') {
             abort(403);
         }
 

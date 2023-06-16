@@ -33,25 +33,25 @@
               <li class="dropdown {{ Request::is('users-prodi-ti', 'users-prodi-ptik', 'users-prodi-sipil') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Users</span></a>
                 <ul class="dropdown-menu">
-                  @can('prodi_ti')
+                  
                   <li><a class="nav-link" href="/users-prodi-ti">Prodi Teknik Informatika</a></li>
-                  @endcan
-                  @can('prodi_ptik')
+                  
+                 
                   <li><a class="nav-link" href="/users-prodi-ptik">Prodi PTIK</a></li>   
-                  @endcan
-                  @can('prodi_sipil')
+                  
+                  
                   <li><a class="nav-link" href="/users-prodi-sipil">Prodi Teknik Sipil</a></li>
-                  @endcan
+                  
                 </ul>
               </li>
             </ul>
-            
-            @can('register')
+            @can('create user')
             <div class="mt-3 p-3 hide-sidebar-mini">
               <a href="/register" target="_blank" class="btn btn-primary btn-lg btn-block btn-icon-split"> Registrasi User </a>
             </div>
             @endcan
-            @can('create', App\Models\Surat::class)
+            
+            @can('create surat')
             <div class="p-3 hide-sidebar-mini">
               <a href="/buat-surat" class="btn btn-primary btn-lg btn-block btn-icon-split"> Buat Surat </a>
             </div>     

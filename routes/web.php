@@ -27,15 +27,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [DashboardController::class, 'count'])->middleware('auth');
 
-Route::get('/search', [DashboardController::class, 'search'])->middleware('auth');
-
 Route::get('/login', [LoginController::class, 'LoginView'])->name('login')->middleware('guest');
 
 Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/register', [RegistrasiController::class, 'RegistrasiView'])->middleware('admin');
+Route::get('/register', [RegistrasiController::class, 'RegistrasiView'])->middleware('can:create user');
 
 Route::post('/register', [RegistrasiController::class, 'store']);
 
@@ -49,7 +47,9 @@ Route::get('/surat-keluar', [SuratController::class, 'index'])->middleware('auth
 
 Route::get('/surat-masuk', [SuratController::class, 'index2'])->middleware('auth');
 
-Route::get('/buat-surat', [SuratController::class, 'create'])->can('create', Surat::class);
+Route::get('/surat-prodi-ti', [SuratProdiController::class, 'prodi_ti'])->middleware('auth');
+
+Route::get('/buat-surat', [SuratController::class, 'create'])->middleware('can:create surat');
 
 Route::post('/buat-surat', [SuratController::class, 'store'])->middleware('auth');
 
@@ -60,8 +60,6 @@ Route::delete('/surat/{userId}/{suratId}', [SuratController::class, 'destroy'])-
 Route::delete('/users-delete/{id}', [UsersProdiTiController::class, 'destroy'])->middleware('auth');
 
 Route::put('/users-update/{user:id}', [UsersProdiTiController::class, 'update']);
-
-Route::get('/surat-prodi-ti', [SuratProdiController::class, 'prodi_ti'])->middleware('auth');
 
 Route::get('/edit-surat/{surat:no_surat}/edit', [SuratController::class, 'edit'])->name('surat.edit');
 

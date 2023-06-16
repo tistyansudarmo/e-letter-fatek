@@ -6,6 +6,8 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Prodi;
 use App\Models\Level;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -100,6 +102,43 @@ class DatabaseSeeder extends Seeder
         Level::create([
             'jabatan' => 'Admin'
         ]);
+
+
+        $adminRole = Role::create(['name' => 'admin']);
+        $pegawaiRole = Role::create(['name' => 'pegawai']);
+        $dosenRole = Role::create(['name' => 'dosen']);
+        $dekanRole = Role::create(['name' => 'dekan']);
+        $pimproRole = Role::create(['name' => 'pimpro']);
+        $rektorRole = Role::create(['name' => 'rektor']);
+
+        $addUserPermission = Permission::create(['name' => 'create user']);
+        $updateUserPermission = Permission::create(['name' => 'update user']);
+        $deleteUserPermission = Permission::create(['name' => 'delete user']);
+        $createSuratPermission = Permission::create(['name' => 'create surat']);
+        $updateSuratPermission = Permission::create(['name' => 'update surat']);
+        $deleteSuratPermission = Permission::create(['name' => 'delete surat']);
+        
+        $adminRole->syncPermissions([$addUserPermission, $updateUserPermission, $deleteUserPermission]);
+        $pegawaiRole->syncPermissions([$createSuratPermission, $updateSuratPermission, $deleteSuratPermission]);
+
+        $userAdmin = User::where('level_id', '=', 6)->get();
+
+        foreach ($userAdmin as $admin) {
+            $admin->assignRole('admin');
+        }
+
+        $userPegawai = User::where('level_id', '=', 2)->get();
+
+        foreach ($userPegawai as $pegawai) {
+            $pegawai->assignRole('pegawai');
+        }
+        
+
+
+
+
       
+
+        
     }
 }
