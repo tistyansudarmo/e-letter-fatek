@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->text('nip')->unique();
+            $table->string('nip')->unique();
             $table->text('alamat');
             $table->text('ttl');
             $table->string('no_hp');
