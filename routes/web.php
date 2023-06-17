@@ -43,9 +43,9 @@ Route::get('/users-prodi-ptik', [UsersProdiPtikController::class, 'view'])->midd
 
 Route::get('/users-prodi-sipil', [UsersProdiSipilController::class, 'view'])->middleware('auth');
 
-Route::get('/surat-keluar', [SuratController::class, 'index'])->middleware('auth');
+Route::get('/surat-keluar', [SuratController::class, 'index'])->middleware('can:create surat');
 
-Route::get('/surat-masuk', [SuratController::class, 'index2'])->middleware('auth');
+Route::get('/surat-masuk', [SuratController::class, 'index2'])->middleware('can:create surat');
 
 Route::get('/surat-prodi-ti', [SuratProdiController::class, 'prodi_ti'])->middleware('auth');
 
