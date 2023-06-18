@@ -33,8 +33,6 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/register', [RegistrasiController::class, 'RegistrasiView'])->middleware('can:create user');
-
 Route::post('/register', [RegistrasiController::class, 'store']);
 
 Route::get('/users-prodi-ti', [UsersProdiTiController::class, 'view'])->middleware('auth');
@@ -43,13 +41,7 @@ Route::get('/users-prodi-ptik', [UsersProdiPtikController::class, 'view'])->midd
 
 Route::get('/users-prodi-sipil', [UsersProdiSipilController::class, 'view'])->middleware('auth');
 
-Route::get('/surat-keluar', [SuratController::class, 'index'])->middleware('can:create surat');
-
-Route::get('/surat-masuk', [SuratController::class, 'index2'])->middleware('can:create surat');
-
 Route::get('/surat-prodi-ti', [SuratProdiController::class, 'prodi_ti'])->middleware('auth');
-
-Route::get('/buat-surat', [SuratController::class, 'create'])->middleware('can:create surat');
 
 Route::post('/buat-surat', [SuratController::class, 'store'])->middleware('auth');
 
@@ -61,9 +53,19 @@ Route::delete('/users-delete/{id}', [UsersProdiTiController::class, 'destroy'])-
 
 Route::put('/users-update/{user:id}', [UsersProdiTiController::class, 'update']);
 
-Route::get('/edit-surat/{surat:no_surat}/edit', [SuratController::class, 'edit'])->name('surat.edit');
-
 Route::put('/surat/{surat}', [SuratController::class, 'update'])->name('surat.update');
+
+
+Route::group(['middleware' => ['role:admin|pimpro']], function () {
+    Route::get('/register', [RegistrasiController::class, 'RegistrasiView']);
+});
+
+Route::group(['middleware' => ['role:pegawai']], function () {
+    Route::get('/surat-keluar', [SuratController::class, 'index']);
+    Route::get('/surat-masuk', [SuratController::class, 'index2']);
+    Route::get('/buat-surat', [SuratController::class, 'create']);
+    Route::get('/edit-surat/{surat:no_surat}/edit', [SuratController::class, 'edit'])->name('surat.edit');
+});
 
 
 

@@ -13,9 +13,9 @@
       <th scope="col">T/T/B Lahir</th>
       <th scope="col">Nomor Handphone</th>
       <th scope="col">Jabatan</th>
-      @can('create user')
+      @role('admin')
       <th scope="col">Aksi</th>
-      @endcan
+      @endrole
     </tr>
   </thead>
   <tbody>
@@ -30,7 +30,7 @@
         <td>{{ $user->ttl }}</td>
         <td>{{ $user->no_hp }}</td>
         <td>{{ $user->jabatan }}</td>
-        @can('create user')
+        @role('admin')
         <td>
 
         <div class="d-flex justify-content-between">
@@ -194,7 +194,7 @@
         </td>
 
   </tr>
-  @endcan
+  @endrole
     @endforeach
   </tbody>
 </table>

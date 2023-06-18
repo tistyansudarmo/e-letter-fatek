@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Prodi;
 use App\Models\Level;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 
 class RegistrasiController extends Controller
 {
     public function RegistrasiView() {
-        return view('layouts.register.register', ['prodi' => Prodi::all()], ['level' => Level::all()], ['title' => 'Registrasi']);
+        return view('layouts.register.register', ['prodi' => Prodi::all()], ['level' => Level::all(), 'role' => Role::all()], ['title' => 'Registrasi']);
     }
     
 
@@ -26,14 +27,15 @@ class RegistrasiController extends Controller
             'ttl' => 'required',
             'password' => ['min:8', 'required'],
             'prodi_id' => 'required',
-            'level_id' => 'required'
+            'level_id' => 'required',
         ]);
 
         $validate['name'] = ucwords($validate['name']);
         
         $validate['password'] = bcrypt($validate['password']);
 
-        User::create($validate);
+        $role = User::create($validate);
+        $role->assignRole($request->input('role'));
 
         return redirect('/');
 

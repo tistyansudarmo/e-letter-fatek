@@ -87,8 +87,6 @@ class SuratController extends Controller
     }
 
     public function edit (Surat $surat){
-        
-        $this->authorize('update', $surat);
 
         return view('layouts.surat.edit-surat', ['users' => User::all(), 'surat' => $surat],['title' => 'Edit Surat']);
     }

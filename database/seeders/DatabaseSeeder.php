@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
             'ttl' => '2000-04-12',
             'no_hp' => '12345678',
             'prodi_id' => 1,
-            'level_id' => 2
+            'level_id' => 3
         ]);
 
         
@@ -120,6 +120,7 @@ class DatabaseSeeder extends Seeder
         
         $adminRole->syncPermissions([$addUserPermission, $updateUserPermission, $deleteUserPermission]);
         $pegawaiRole->syncPermissions([$createSuratPermission, $updateSuratPermission, $deleteSuratPermission]);
+        $pimproRole->syncPermissions([$addUserPermission, $updateUserPermission, $deleteUserPermission]);
 
         $userAdmin = User::where('level_id', '=', 6)->get();
 
@@ -131,6 +132,12 @@ class DatabaseSeeder extends Seeder
 
         foreach ($userPegawai as $pegawai) {
             $pegawai->assignRole('pegawai');
+        }
+
+        $userPimpro = User::where('level_id', '=', 3)->get();
+
+        foreach ($userPimpro as $pimpro) {
+            $pimpro->assignRole('pimpro');
         }
         
 
