@@ -7,27 +7,27 @@ use Illuminate\Http\Request;
 use App\Models\Prodi;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
-use App\Models\Level;
+use App\Models\Jabatan;
 use Illuminate\Validation\Rule;
 
 class UsersProdiTiController extends Controller
 {
     public function view()
     {
-        if(auth()->user()->prodi_id != 1 && auth()->user()->level->jabatan != 'Admin') {
+        if(auth()->user()->prodi_id != 1 && auth()->user()->jabatan->nama != 'Admin') {
             abort(403);
         }
 
-         $users = User::join('levels', 'users.level_id', '=', 'levels.id')
+         $users = User::join('jabatans', 'users.jabatan_id', '=', 'jabatans.id')
             ->join('prodis', 'prodis.id', '=', 'users.prodi_id')
-            ->select('users.*', 'levels.jabatan')
+            ->select('users.*', 'jabatans.nama')
             ->where('prodi_id', 1)
             ->get();
 
         $prodi = Prodi::all();
         $role = Role::all();
-        $level = Level::all();
-        return view('layouts.users-prodi.prodi-ti', ['users' => $users, 'prodi' => $prodi, 'level' => $level, 'role' => $role], ['title' => 'Prodi Teknik Informatika']);
+        $jabatan = Jabatan::all();
+        return view('layouts.users-prodi.prodi-ti', ['users' => $users, 'prodi' => $prodi, 'jabatan' => $jabatan, 'role' => $role], ['title' => 'Prodi Teknik Informatika']);
     }
 
 
@@ -48,7 +48,7 @@ class UsersProdiTiController extends Controller
             'ttl' => 'required',
             'password' => '',
             'prodi_id' => 'required',
-            'level_id' => 'required'
+            'jabatan_id' => 'required'
         ]);
 
         if($request->input('password')) {
@@ -58,8 +58,8 @@ class UsersProdiTiController extends Controller
         }
 
         $user->syncRoles([$request->input('role')]);
-        $user->assignRole($request->input('role'));
-        $user->update($validate);
+        $role = $user->assignRole($request->input('role'));
+        $user->update([$validate, $role]);
         
 
         return redirect('users-prodi-ti');

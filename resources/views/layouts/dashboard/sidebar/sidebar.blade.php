@@ -12,7 +12,7 @@
                 <a href="/"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
             </li>
               <li class="menu-header">Letter</li>
-              @if (auth()->user()->level->jabatan != 'Admin')
+              @if (!auth()->user()->hasRole('admin'))
               <li class="dropdown {{ Request::is('surat-masuk', 'surat-keluar') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Inbox</span></a>
                   <ul class="dropdown-menu">
@@ -33,15 +33,15 @@
               <li class="dropdown {{ Request::is('users-prodi-ti', 'users-prodi-ptik', 'users-prodi-sipil') ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Users</span></a>
                 <ul class="dropdown-menu">
-                  
+                  @if(auth()->user()->prodi_id == 1 || auth()->user()->hasRole('admin'))
                   <li><a class="nav-link" href="/users-prodi-ti">Prodi Teknik Informatika</a></li>
-                  
-                 
+                  @endif
+                  @if(auth()->user()->prodi_id == 2 || auth()->user()->hasRole('admin'))
                   <li><a class="nav-link" href="/users-prodi-ptik">Prodi PTIK</a></li>   
-                  
-                  
+                  @endif
+                  @if(auth()->user()->prodi_id == 3 || auth()->user()->hasRole('admin'))
                   <li><a class="nav-link" href="/users-prodi-sipil">Prodi Teknik Sipil</a></li>
-                  
+                  @endif
                 </ul>
               </li>
             </ul>
@@ -51,7 +51,7 @@
             </div>
             @endrole
             
-            @role('pegawai')
+            @role(['pegawai', 'pimpro'])
             <div class="p-3 hide-sidebar-mini">
               <a href="/buat-surat" class="btn btn-primary btn-lg btn-block btn-icon-split"> Buat Surat </a>
             </div>     

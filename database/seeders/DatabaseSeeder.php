@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Prodi;
-use App\Models\Level;
+use App\Models\Jabatan;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             'ttl' => '2000-04-12',
             'no_hp' => '12345678',
             'prodi_id' => 1,
-            'level_id' => 6
+            'jabatan_id' => 6
         ]);
 
         User::create([
@@ -43,7 +43,7 @@ class DatabaseSeeder extends Seeder
             'ttl' => '2000-04-12',
             'no_hp' => '12345678',
             'prodi_id' => 1,
-            'level_id' => 1
+            'jabatan_id' => 1
         ]);
 
         User::create([
@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
             'ttl' => '2000-04-12',
             'no_hp' => '12345678',
             'prodi_id' => 1,
-            'level_id' => 2
+            'jabatan_id' => 2
         ]);
 
         User::create([
@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
             'ttl' => '2000-04-12',
             'no_hp' => '12345678',
             'prodi_id' => 1,
-            'level_id' => 3
+            'jabatan_id' => 3
         ]);
 
     
@@ -84,23 +84,23 @@ class DatabaseSeeder extends Seeder
             'prodi' => 'Teknik Sipil'
         ]);
 
-        Level::create([
-            'jabatan' => 'Dosen'
+        Jabatan::create([
+            'nama' => 'Dosen'
         ]);
-        Level::create([
-            'jabatan' => 'Pegawai'
+        Jabatan::create([
+            'nama' => 'Pegawai'
         ]);
-        Level::create([
-            'jabatan' => 'Pimpro'
+        Jabatan::create([
+            'nama' => 'Pimpro'
         ]);
-        Level::create([
-            'jabatan' => 'Dekan'
+        Jabatan::create([
+            'nama' => 'Dekan'
         ]);
-        Level::create([
-            'jabatan' => 'Rektor'
+        Jabatan::create([
+            'nama' => 'Rektor'
         ]);
-        Level::create([
-            'jabatan' => 'Admin'
+        Jabatan::create([
+            'nama' => 'Admin'
         ]);
 
 
@@ -120,7 +120,7 @@ class DatabaseSeeder extends Seeder
         
         $adminRole->syncPermissions([$addUserPermission, $updateUserPermission, $deleteUserPermission]);
 
-        $userAdmin = User::where('level_id', '=', 6)->get();
+        $userAdmin = User::where('jabatan_id', '=', 6)->get();
 
         foreach ($userAdmin as $admin) {
             $admin->assignRole('admin');

@@ -2,7 +2,11 @@
 
 @section('container')
 
+  @if(auth()->user()->hasRole('admin'))
   <table class="table table-hover table-responsive table-md">
+  @else
+  <table class="table table-hover table-responsive">  
+  @endif
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -13,7 +17,9 @@
       <th scope="col">T/T/B Lahir</th>
       <th scope="col">Nomor Handphone</th>
       <th scope="col">Jabatan</th>
+      @role('admin')
       <th scope="col">Role</th>
+      @endrole
       @role('admin')
       <th scope="col">Aksi</th>
       @endrole
@@ -30,8 +36,10 @@
         <td>{{ $user->alamat }}</td>
         <td>{{ $user->ttl }}</td>
         <td>{{ $user->no_hp }}</td>
-        <td>{{ $user->jabatan }}</td>
-        <td>{{ $user->getRoleNames() }}</td>
+        <td>{{ $user->jabatan->nama }}</td>
+        @role('admin')
+        <td>{{ $user->getRoleNames()->implode(',') }}</td>
+        @endrole
         @role('admin')
         <td>
 
@@ -145,10 +153,10 @@
                   </div>
 
                   <div class="col-md-6">
-                    <select class="form-control mt-4" aria-label="Default select example" name="level_id">
-                        <option value="">--Pilih Level--</option>
-                        @foreach ($level as $levels)
-                        <option {{ $user->level_id == $levels->id ? 'selected' : '' }} value="{{ $levels->id}}">{{ $levels->jabatan }}</option>
+                    <select class="form-control mt-4" aria-label="Default select example" name="jabatan_id">
+                        <option value="">--Pilih Jabatan--</option>
+                        @foreach ($jabatan as $jabatans)
+                        <option {{ $user->jabatan_id == $jabatans->id ? 'selected' : '' }} value="{{ $jabatans->id}}">{{ $jabatans->nama}}</option>
                         @endforeach
                       </select>
                   </div>

@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Prodi;
-use App\Models\Level;
+use App\Models\Jabatan;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 
 class RegistrasiController extends Controller
 {
     public function RegistrasiView() {
-        return view('layouts.register.register', ['prodi' => Prodi::all()], ['level' => Level::all(), 'role' => Role::all()], ['title' => 'Registrasi']);
+        return view('layouts.register.register', ['prodi' => Prodi::all()], ['level' => Jabatan::all(), 'role' => Role::all()], ['title' => 'Registrasi']);
     }
     
 

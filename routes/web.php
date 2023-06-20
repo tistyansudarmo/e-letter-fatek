@@ -25,7 +25,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'count'])->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'LoginView'])->name('login')->middleware('guest');
 
@@ -35,32 +34,28 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::post('/register', [RegistrasiController::class, 'store']);
 
-Route::get('/users-prodi-ti', [UsersProdiTiController::class, 'view'])->middleware('auth');
-
-Route::get('/users-prodi-ptik', [UsersProdiPtikController::class, 'view'])->middleware('auth');
-
-Route::get('/users-prodi-sipil', [UsersProdiSipilController::class, 'view'])->middleware('auth');
-
-Route::get('/surat-prodi-ti', [SuratProdiController::class, 'prodi_ti'])->middleware('auth');
-
-Route::post('/buat-surat', [SuratController::class, 'store'])->middleware('auth');
-
-Route::get('/surat/{surat:no_surat}', [SuratController::class, 'show'])->middleware('auth');
-
-Route::delete('/surat/{userId}/{suratId}', [SuratController::class, 'destroy'])->middleware('auth');
-
-Route::delete('/users-delete/{id}', [UsersProdiTiController::class, 'destroy'])->middleware('auth');
-
 Route::put('/users-update/{user:id}', [UsersProdiTiController::class, 'update']);
 
 Route::put('/surat/{surat}', [SuratController::class, 'update'])->name('surat.update');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [DashboardController::class, 'count']);
+    Route::get('/users-prodi-ti', [UsersProdiTiController::class, 'view']);
+    Route::get('/users-prodi-ptik', [UsersProdiPtikController::class, 'view']);
+    Route::get('/users-prodi-sipil', [UsersProdiSipilController::class, 'view']);
+    Route::get('/surat-prodi-ti', [SuratProdiController::class, 'prodi_ti']);
+    Route::post('/buat-surat', [SuratController::class, 'store']);
+    Route::get('/surat/{surat:no_surat}', [SuratController::class, 'show']);
+    Route::delete('/surat/{userId}/{suratId}', [SuratController::class, 'destroy']);
+    Route::delete('/users-delete/{id}', [UsersProdiTiController::class, 'destroy']);
+    
+});
 
 Route::group(['middleware' => ['role:admin|pimpro']], function () {
     Route::get('/register', [RegistrasiController::class, 'RegistrasiView']);
 });
 
-Route::group(['middleware' => ['role:pegawai']], function () {
+Route::group(['middleware' => ['role:pegawai|pimpro']], function () {
     Route::get('/surat-keluar', [SuratController::class, 'index']);
     Route::get('/surat-masuk', [SuratController::class, 'index2']);
     Route::get('/buat-surat', [SuratController::class, 'create']);

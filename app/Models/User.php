@@ -50,8 +50,8 @@ class User extends Authenticatable
         return $this->hasMany(SuratUser::class);
     }
 
-    public function level() {
-        return $this->belongsTo(Level::class);
+    public function jabatan() {
+        return $this->belongsTo(Jabatan::class);
     }
 
     public function prodi() {
