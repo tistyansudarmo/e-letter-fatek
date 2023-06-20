@@ -72,7 +72,7 @@ class DatabaseSeeder extends Seeder
             'level_id' => 3
         ]);
 
-        
+    
 
         Prodi::create([
             'prodi' => 'Teknik Informatika'
@@ -119,33 +119,11 @@ class DatabaseSeeder extends Seeder
         $deleteSuratPermission = Permission::create(['name' => 'delete surat']);
         
         $adminRole->syncPermissions([$addUserPermission, $updateUserPermission, $deleteUserPermission]);
-        $pegawaiRole->syncPermissions([$createSuratPermission, $updateSuratPermission, $deleteSuratPermission]);
-        $pimproRole->syncPermissions([$addUserPermission, $updateUserPermission, $deleteUserPermission]);
 
         $userAdmin = User::where('level_id', '=', 6)->get();
 
         foreach ($userAdmin as $admin) {
             $admin->assignRole('admin');
-        }
-
-        $userPegawai = User::where('level_id', '=', 2)->get();
-
-        foreach ($userPegawai as $pegawai) {
-            $pegawai->assignRole('pegawai');
-        }
-
-        $userPimpro = User::where('level_id', '=', 3)->get();
-
-        foreach ($userPimpro as $pimpro) {
-            $pimpro->assignRole('pimpro');
-        }
-        
-
-
-
-
-      
-
-        
+        }        
     }
 }

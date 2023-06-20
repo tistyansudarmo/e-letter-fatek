@@ -10,7 +10,7 @@
               <li class="menu-header">Dashboard</li>
               <li class="dropdown {{ Request::is('/') ? 'active' : '' }}">
                 <a href="/"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
-              </li>
+            </li>
               <li class="menu-header">Letter</li>
               @if (auth()->user()->level->jabatan != 'Admin')
               <li class="dropdown {{ Request::is('surat-masuk', 'surat-keluar') ? 'active' : '' }}">

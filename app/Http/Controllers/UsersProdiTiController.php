@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Prodi;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use App\Models\Level;
 use Illuminate\Validation\Rule;
 
@@ -17,17 +18,16 @@ class UsersProdiTiController extends Controller
             abort(403);
         }
 
-        $users = DB::table('users')
-                    ->join('levels', 'users.level_id', '=', 'levels.id')
-                    ->join('prodis', 'prodis.id', '=', 'users.prodi_id')
-                    ->select('users.*', 'levels.jabatan')
-                    ->where('prodi_id', '=', 1)
-                    ->get();
+         $users = User::join('levels', 'users.level_id', '=', 'levels.id')
+            ->join('prodis', 'prodis.id', '=', 'users.prodi_id')
+            ->select('users.*', 'levels.jabatan')
+            ->where('prodi_id', 1)
+            ->get();
 
         $prodi = Prodi::all();
-        
+        $role = Role::all();
         $level = Level::all();
-        return view('layouts.users-prodi.prodi-ti', ['users' => $users, 'prodi' => $prodi, 'level' => $level], ['title' => 'Prodi Teknik Informatika']);
+        return view('layouts.users-prodi.prodi-ti', ['users' => $users, 'prodi' => $prodi, 'level' => $level, 'role' => $role], ['title' => 'Prodi Teknik Informatika']);
     }
 
 
@@ -50,12 +50,19 @@ class UsersProdiTiController extends Controller
             'prodi_id' => 'required',
             'level_id' => 'required'
         ]);
-        
-        $validate['password'] = bcrypt($validate['password']);
-        
-        $user->update($validate);
 
-        return redirect('/users-prodi-ti');
+        if($request->input('password')) {
+            $validate['password'] = bcrypt($validate['password']);
+        }else{
+            $validate['password'] = $user->password;
+        }
+
+        $user->syncRoles([$request->input('role')]);
+        $user->assignRole($request->input('role'));
+        $user->update($validate);
+        
+
+        return redirect('users-prodi-ti');
 
     }
 

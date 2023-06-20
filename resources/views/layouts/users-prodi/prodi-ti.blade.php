@@ -2,7 +2,7 @@
 
 @section('container')
 
-  <table class="table table-hover table-responsive">
+  <table class="table table-hover table-responsive table-md">
   <thead>
     <tr>
       <th scope="col">No</th>
@@ -13,6 +13,7 @@
       <th scope="col">T/T/B Lahir</th>
       <th scope="col">Nomor Handphone</th>
       <th scope="col">Jabatan</th>
+      <th scope="col">Role</th>
       @role('admin')
       <th scope="col">Aksi</th>
       @endrole
@@ -30,6 +31,7 @@
         <td>{{ $user->ttl }}</td>
         <td>{{ $user->no_hp }}</td>
         <td>{{ $user->jabatan }}</td>
+        <td>{{ $user->getRoleNames() }}</td>
         @role('admin')
         <td>
 
@@ -147,6 +149,14 @@
                         <option value="">--Pilih Level--</option>
                         @foreach ($level as $levels)
                         <option {{ $user->level_id == $levels->id ? 'selected' : '' }} value="{{ $levels->id}}">{{ $levels->jabatan }}</option>
+                        @endforeach
+                      </select>
+                  </div>
+                  <div class="col-md-6">
+                    <select class="form-control mt-4" aria-label="Default select example" name="role">
+                        <option value="">--Pilih Role--</option>
+                        @foreach ($role as $roles)
+                        <option {{ $user->hasRole($roles->name)  ? 'selected' : '' }} value="{{ $roles->id}}">{{ $roles->name }}</option>
                         @endforeach
                       </select>
                   </div>

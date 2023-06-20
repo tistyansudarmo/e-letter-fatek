@@ -131,7 +131,7 @@
                     </div>
                        @role('admin|pimpro') 
                        <div class="form-group col-6">
-                        <select class="form-control" aria-label="Default select example" name="level_id" value="{{ old('level') }}">
+                        <select class="form-control" aria-label="Default select example" name="level_id" value="{{ old('admin|pimpro') }}">
                         <option value="">--Pilih Jabatan--</option>
                         @foreach ($level as $levels)
                         <option value="{{ $levels->id }}">{{ $levels->jabatan }}</option>
@@ -141,7 +141,7 @@
                       @endrole
                        @role('admin') 
                        <div class="form-group col-6">
-                        <select class="form-control" aria-label="Default select example" name="role" value="{{ old('role') }}">
+                        <select class="form-control" aria-label="Default select example" name="role" value="{{ old('admin') }}">
                         <option value="">--Pilih Roles--</option>
                         @foreach ($role as $roles)
                         <option value="{{ $roles->id }}">{{ $roles->name }}</option>
