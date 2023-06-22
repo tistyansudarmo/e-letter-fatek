@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.main.main')
 
 @section('container')
-    <div class="container">
+  <div class="container">
     <table class="table table-hover table-responsive-md">
   <thead>
     <tr>

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class RegistrasiController extends Controller
 {
     public function RegistrasiView() {
-        return view('layouts.register.register', ['prodi' => Prodi::all()], ['level' => Jabatan::all(), 'role' => Role::all()], ['title' => 'Registrasi']);
+        return view('layouts.register.register', ['prodi' => Prodi::all()], ['jabatan' => Jabatan::all(), 'role' => Role::all()], ['title' => 'Registrasi']);
     }
     
 
@@ -27,7 +27,7 @@ class RegistrasiController extends Controller
             'ttl' => 'required',
             'password' => ['min:8', 'required'],
             'prodi_id' => 'required',
-            'level_id' => 'required',
+            'jabatan_id' => 'required',
         ]);
 
         $validate['name'] = ucwords($validate['name']);

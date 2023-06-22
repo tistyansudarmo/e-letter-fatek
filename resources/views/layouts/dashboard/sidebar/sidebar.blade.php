@@ -24,7 +24,7 @@
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Inbox</span></a>
                   <ul class="dropdown-menu">
                     <li><a class="nav-link" href="/surat-prodi-ti">Surat Prodi TI</a></li>
-                    <li><a class="nav-link" href="">Surat Prodi PTIK</a></li>
+                    <li><a class="nav-link" href="/surat-prodi-ptik">Surat Prodi PTIK</a></li>
                     <li><a class="nav-link" href="">Surat Prodi Sipil</a></li>
                   </ul>
                 @endif

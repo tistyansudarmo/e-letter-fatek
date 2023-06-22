@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.main.main')
 
 @section('container')
-
+  <div class="container">
   @if(auth()->user()->hasRole('admin'))
   <table class="table table-hover table-responsive table-md">
   @else
@@ -216,5 +216,6 @@
     @endforeach
   </tbody>
 </table>
+</div>
 
 @endsection

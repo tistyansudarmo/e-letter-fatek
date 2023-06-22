@@ -44,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users-prodi-ptik', [UsersProdiPtikController::class, 'view']);
     Route::get('/users-prodi-sipil', [UsersProdiSipilController::class, 'view']);
     Route::get('/surat-prodi-ti', [SuratProdiController::class, 'prodi_ti']);
+    Route::get('/surat-prodi-ptik', [SuratProdiController::class, 'prodi_ptik']);
     Route::post('/buat-surat', [SuratController::class, 'store']);
     Route::get('/surat/{surat:no_surat}', [SuratController::class, 'show']);
     Route::delete('/surat/{userId}/{suratId}', [SuratController::class, 'destroy']);
@@ -56,10 +57,13 @@ Route::group(['middleware' => ['role:admin|pimpro']], function () {
 });
 
 Route::group(['middleware' => ['role:pegawai|pimpro']], function () {
-    Route::get('/surat-keluar', [SuratController::class, 'index']);
-    Route::get('/surat-masuk', [SuratController::class, 'index2']);
     Route::get('/buat-surat', [SuratController::class, 'create']);
     Route::get('/edit-surat/{surat:no_surat}/edit', [SuratController::class, 'edit'])->name('surat.edit');
+});
+
+Route::group(['middleware' => ['role:pegawai|pimpro|dosen|dekan|rektor']], function () {
+    Route::get('/surat-keluar', [SuratController::class, 'index']);
+    Route::get('/surat-masuk', [SuratController::class, 'index2']);
 });
 
 

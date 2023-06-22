@@ -72,8 +72,6 @@ class DatabaseSeeder extends Seeder
             'jabatan_id' => 3
         ]);
 
-    
-
         Prodi::create([
             'prodi' => 'Teknik Informatika'
         ]);
@@ -117,6 +115,7 @@ class DatabaseSeeder extends Seeder
         $createSuratPermission = Permission::create(['name' => 'create surat']);
         $updateSuratPermission = Permission::create(['name' => 'update surat']);
         $deleteSuratPermission = Permission::create(['name' => 'delete surat']);
+        $viewSuratPermission = Permission::create(['name' => 'view surat']);
         
         $adminRole->syncPermissions([$addUserPermission, $updateUserPermission, $deleteUserPermission]);
 

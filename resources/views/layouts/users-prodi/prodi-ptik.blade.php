@@ -26,7 +26,7 @@
         <td>{{ $user->alamat }}</td>
         <td>{{ $user->ttl }}</td>
         <td>{{ $user->no_hp }}</td>
-        <td>{{ $user->jabatan }}</td>
+        <td>{{ $user->jabatan->nama }}</td>
     </tr>
     @endforeach
   </tbody>

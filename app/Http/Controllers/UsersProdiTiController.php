@@ -58,8 +58,8 @@ class UsersProdiTiController extends Controller
         }
 
         $user->syncRoles([$request->input('role')]);
-        $role = $user->assignRole($request->input('role'));
-        $user->update([$validate, $role]);
+        $user->assignRole($request->input('role'));
+        $user->update($validate);
         
 
         return redirect('users-prodi-ti');

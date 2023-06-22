@@ -71,8 +71,8 @@ class SuratController extends Controller
     }
 
     public function show(Surat $surat) {
-        
-        $this->authorize('view', $surat);
+
+         $this->authorize('view', $surat);
 
         $pdf = PDF::loadView('layouts.surat.show-surat', ['surat' => $surat]);
 
