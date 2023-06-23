@@ -22,15 +22,7 @@ class CreateSuratsTable extends Migration
             $table->string('logo_surat');
             $table->text('content_surat');
             $table->string('ttd_surat');
-            $table->text('status');
             $table->timestamps();
-        });
-
-        Schema::create('surat_user', function (Blueprint $table) {
-            $table->timestamps();
-            $table->foreignId('surat_id');
-            $table->foreignId('user_id');
-            $table->primary(['surat_id', 'user_id']);
         });
 
 

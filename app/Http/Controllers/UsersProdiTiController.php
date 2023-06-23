@@ -41,7 +41,7 @@ class UsersProdiTiController extends Controller
         $validate = $request->validate([
             'name' => ['required'],
             'username' => ['required',  Rule::unique('users')->ignore($user->id)],
-            'email' => ['required', Rule::unique('users')->ignore($user->id)],
+            'email' => ['required', 'email:dns', Rule::unique('users')->ignore($user->id)],
             'nip' => ['required', Rule::unique('users')->ignore($user->id)],
             'no_hp' => 'required',
             'alamat' => 'required',

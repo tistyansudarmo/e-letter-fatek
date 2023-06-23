@@ -57,7 +57,7 @@
                             $selectedUsers = $surat->penerima->pluck('id')->toArray();
                         @endphp --}}
                         @foreach ($users as $user)
-                            @if ($user->name != auth()->user()->name && ($user->name != 'admin' || auth()->user()->name == 'admin') && ($user->prodi_id == auth()->user()->prodi_id))
+                            @if ($user->prodi_id == auth()->user()->prodi_id && $user->name != auth()->user()->name &&!$user->hasRole('admin'))
                             <input class="form-check-input mt-2" type="checkbox" value="{{ $user->id }}" name="penerima[]" {{  $surat->penerima->contains($user->id) ? 'checked' : '' }}>
 
                             {{-- Metode contains() memeriksa apakah koleksi $surat->penerima berisi elemen id atau nilai yg sama dengan $user->id . Jika iya, maka akan menghasilkan nilai true dan output 'checked', jika tidak, maka akan menghasilkan nilai false dan output string kosong (''). --}}

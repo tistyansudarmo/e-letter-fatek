@@ -18,7 +18,7 @@ class SuratController extends Controller
         return view('layouts.surat.surat-keluar', ['title' => 'Surat Keluar', 'surat' => DB::table('surats')
         ->join('surat_user', 'surats.id', '=', 'surat_user.surat_id')
         ->join('users', 'surat_user.user_id', '=', 'users.id')
-        ->select('surats.*', 'users.name', 'surat_user.user_id', 'surat_user.surat_id')
+        ->select('surats.*', 'users.name', 'surat_user.*')
         ->where('surats.sender_id', '=', auth()->user()->id)
         ->orderByDesc('surats.id')
         ->get()]);
@@ -61,7 +61,6 @@ class SuratController extends Controller
         $validate['ttd_surat'] = $request->file('ttd_surat')->store('image-surat');
         $validate['prodi_id'] = auth()->user()->prodi_id;
         $validate['sender_id'] = auth()->user()->id;
-        $validate['status'] = ''; // Status awal kosong
      
         $surat = Surat::create($validate);
 
@@ -72,15 +71,13 @@ class SuratController extends Controller
 
     public function show(Surat $surat) {
 
-         $this->authorize('view', $surat);
+        $this->authorize('view', $surat);
 
         $pdf = PDF::loadView('layouts.surat.show-surat', ['surat' => $surat]);
-
-        $recipient = $surat->surat_user->pluck('user_id')->toArray();
-
-        if (in_array(auth()->user()->id, $recipient)) {
-            $surat->update(['status' => 'Sudah Dibaca']);
-    }
+        $loggedInUserId = auth()->user()->id;
+        $suratUser = SuratUser::where('surat_id', $surat->id)
+        ->where('user_id', $loggedInUserId)
+        ->update(['status' => 'Sudah Dibaca']);
 
         return $pdf->stream('surat.pdf');
 

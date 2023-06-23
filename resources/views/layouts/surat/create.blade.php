@@ -54,7 +54,7 @@
                       <label style="font-weight:600; color: #34395e; font-size: 12px; ">Kirim ke :</label>
                       <div class="form-check form-group">
                         @foreach ($users as $user)
-                        @if ($user->name != auth()->user()->name && ($user->name != 'admin' || auth()->user()->name == 'admin') && ($user->prodi_id == auth()->user()->prodi_id))
+                        @if ($user->prodi_id == auth()->user()->prodi_id && $user->name != auth()->user()->name && !$user->hasRole('admin'))
                         <input class="form-check-input mt-2" type="checkbox" value="{{ $user->id }}" name="penerima[]">
                           <label class="form-check-label d-block p-2" >
                              {{ $user->name }}
