@@ -133,7 +133,7 @@ class SuratController extends Controller
             Surat::where('id', '=', $suratId)->delete();
         }
 
-        return redirect('/surat-keluar');
+        return redirect('/surat-keluar')->with('status', 'Surat Berhasil Dihapus!');
     }
 
    

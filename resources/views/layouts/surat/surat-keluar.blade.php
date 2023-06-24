@@ -2,6 +2,14 @@
 
 @section('container')
     <div class="container">
+    @if(session()->has('status')) 
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('status') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    @endif
     <table class="table table-hover table-responsive-md">
   <thead>
     <tr>
@@ -38,10 +46,10 @@
         <form action="/surat/{{ $surats->user_id }}/{{ $surats->id }}" method="post"> 
           @csrf
           @method('delete')
-        <a href="/surat/{{ $surats->user_id }}/{{ $surats->surat_id }}" class="badge badge-danger border-0" data-toggle="modal" data-target="#exampleModal">Hapus</a>
+        <a href="/surat/{{ $surats->user_id }}/{{ $surats->surat_id }}" class="badge badge-danger border-0" data-toggle="modal" data-target="#exampleModal{{ $surats->user_id }}">Hapus</a>
         {{-- <button type="button" class="badge badge-danger border-0" data-toggle="modal" data-target="#exampleModal" >Hapus</button> --}}
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal{{ $surats->user_id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
               <div class="modal-header">
